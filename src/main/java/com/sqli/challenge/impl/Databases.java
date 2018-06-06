@@ -41,4 +41,9 @@ final class Databases
   {
     return currentlySelectedDatabase.selectFromTable(tableName, columnsToSelect);
   }
+  
+  void insertIntoTable(final String tableName, final String[] selectedColumns, final Object[] correspondingValues)
+  {
+    currentlySelectedDatabase.insertIntoTable(tableName, selectedColumns, correspondingValues);
+  }
 }

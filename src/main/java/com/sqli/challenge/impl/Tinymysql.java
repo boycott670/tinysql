@@ -31,4 +31,9 @@ public final class Tinymysql
   {
     return databases.selectFromTable(tableName, columnsToSelect);
   }
+  
+  public void insertIntoTable(final String tableName, final String[] selectedColumns, final Object[] correspondingValues)
+  {
+    databases.insertIntoTable(tableName, selectedColumns, correspondingValues);
+  }
 }

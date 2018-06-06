@@ -14,7 +14,9 @@ public enum Queries
   
   CREATE_TABLE(Pattern.compile("^create table (.+) \\((.+)\\)$", Pattern.CASE_INSENSITIVE), CreateTableQuery::new),
   
-  SELECT_FROM_TABLE(Pattern.compile("^select (.+) from (.+)$", Pattern.CASE_INSENSITIVE), SelectFromTableQuery::new);
+  SELECT_FROM_TABLE(Pattern.compile("^select (.+) from (.+)$", Pattern.CASE_INSENSITIVE), SelectFromTableQuery::new),
+  
+  INSERT_INTO_TABLE(Pattern.compile("^insert into (.+) (.+) values\\((.+)\\)$", Pattern.CASE_INSENSITIVE), InsertIntoTableQuery::new);
   
   private final Pattern queryPattern;
   

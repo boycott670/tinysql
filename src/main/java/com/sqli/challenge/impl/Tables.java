@@ -30,10 +30,22 @@ final class Tables
     tables.put(tableName, new Table(tableColumns));
   }
   
+  private Table fetchSelectedTable(final String tableName)
+  {
+    return Optional.ofNullable(tables.get(tableName)).orElseThrow(() -> new SqlFacadeException("Table not found."));
+  }
+  
   List<String> selectFromTable(final String tableName, final String[] columnsToSelect)
   {
-    final Table correspondingTable = Optional.ofNullable(tables.get(tableName)).orElseThrow(() -> new SqlFacadeException("Table not found."));
+    final Table correspondingTable = fetchSelectedTable(tableName);
     
-    return correspondingTable.selectFromTable(columnsToSelect);
+    return correspondingTable.selectFrom(columnsToSelect);
+  }
+  
+  void insertIntoTable(final String tableName, final String[] selectedColumns, final Object[] correspondingValues)
+  {
+    final Table correspondingTable = fetchSelectedTable(tableName);
+    
+    correspondingTable.insertInto(selectedColumns, correspondingValues);
   }
 }
