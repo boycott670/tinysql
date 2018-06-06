@@ -6,15 +6,16 @@ import com.sqli.challenge.impl.Tinymysql;
 
 public final class SelectFromTableQuery implements Query
 {
-  
+
   private String[] columnsToSelect;
+
   private String tableName;
 
   @Override
   public void setQueryParameters(String[] queryParameters)
   {
     columnsToSelect = queryParameters[0].split(",");
-    
+
     tableName = queryParameters[queryParameters.length - 1];
   }
 
@@ -23,7 +24,5 @@ public final class SelectFromTableQuery implements Query
   {
     return tinymysql.selectFromTable(tableName, columnsToSelect);
   }
-
-  
 
 }

@@ -1,6 +1,6 @@
 package com.sqli.challenge.impl;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,7 +14,7 @@ final class Tables
   
   Tables()
   {
-    tables = new LinkedHashMap<>();
+    tables = new HashMap<>();
   }
   
   List<String> showTables()

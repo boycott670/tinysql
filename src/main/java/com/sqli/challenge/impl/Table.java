@@ -14,17 +14,19 @@ final class Table
 {
   private final String[] columns;
   
-  private final Collection<Object[]> rows;
-  
   private final ToIntFunction<String> correspondingColumnIndex;
+  
+  private final Collection<Object[]> rows;
   
   Table(final String[] columns)
   {
     this.columns = columns;
     
-    final List<String> columnsAsLowerCase = Collections.unmodifiableList(Arrays.stream(columns)
-        .map(String::toLowerCase)
-        .collect(Collectors.toList()));
+    final List<String> columnsAsLowerCase = Collections.unmodifiableList(
+        Arrays.stream(columns)
+          .map(String::toLowerCase)
+          .collect(Collectors.toList())
+    );
     
     correspondingColumnIndex = selectedColumn -> columnsAsLowerCase.indexOf(selectedColumn.toLowerCase());
     
@@ -33,15 +35,19 @@ final class Table
   
   List<String> selectFrom(final String[] columnsToSelect)
   {
-    final Function<Object, String> cellPrinter = cellValue -> Optional.ofNullable(cellValue)
-        .map(Object::toString)
-        .orElse("NULL");
+    final Function<Object, String> cellPrinter = cellValue ->
+        Optional.ofNullable(cellValue)
+          .map(Object::toString)
+          .orElse("NULL")
+    ;
     
-    Function<Object[], String> rowToString = row -> Arrays.stream(columnsToSelect)
-        .mapToInt(correspondingColumnIndex)
-        .mapToObj(index -> row[index])
-        .map(cellPrinter)
-        .collect(Collectors.joining(","));
+    Function<Object[], String> rowToString = row ->
+        Arrays.stream(columnsToSelect)
+          .mapToInt(correspondingColumnIndex)
+          .mapToObj(index -> row[index])
+          .map(cellPrinter)
+          .collect(Collectors.joining(","))
+    ;
 
     return rows.stream()
         .map(rowToString)

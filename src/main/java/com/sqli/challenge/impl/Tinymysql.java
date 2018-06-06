@@ -10,8 +10,7 @@ public final class Tinymysql
   {
     databases = new Databases();
   }
-  
-  // create database statement used as a combination of (create + use) statements at the same time
+    
   public void createDatabase(final String databaseName)
   {
     databases.createDatabase(databaseName);

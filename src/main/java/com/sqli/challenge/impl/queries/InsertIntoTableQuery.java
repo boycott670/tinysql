@@ -9,7 +9,9 @@ public final class InsertIntoTableQuery implements Query
 {
   
   private String tableName;
+  
   private String[] selectedColumns;
+  
   private Object[] correspondingValues;
 
   @Override
