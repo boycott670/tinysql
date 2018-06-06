@@ -1,12 +1,12 @@
 package com.sqli.challenge.impl;
 
-import java.util.ArrayDeque;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+
+import com.sqli.challenge.SqlFacadeException;
 
 final class Tables
 {
@@ -19,10 +19,21 @@ final class Tables
   
   List<String> showTables()
   {
-    final Iterator<String> reverseIteratorOverTablesNames = new ArrayDeque<>(tables.keySet()).descendingIterator();
+    return tables.keySet()
+        .stream()
+        .sorted()
+        .collect(Collectors.toList());
+  }
+  
+  void createTable(final String tableName, final String[] tableColumns)
+  {
+    tables.put(tableName, new Table(tableColumns));
+  }
+  
+  List<String> selectFromTable(final String tableName, final String[] columnsToSelect)
+  {
+    final Table correspondingTable = Optional.ofNullable(tables.get(tableName)).orElseThrow(() -> new SqlFacadeException("Table not found."));
     
-    final Iterable<String> correspondingIterable = () -> reverseIteratorOverTablesNames;
-    
-    return StreamSupport.stream(correspondingIterable.spliterator(), false).collect(Collectors.toList());
+    return correspondingTable.selectFromTable(columnsToSelect);
   }
 }

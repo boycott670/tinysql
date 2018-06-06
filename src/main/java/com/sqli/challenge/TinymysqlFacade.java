@@ -19,9 +19,9 @@ public class TinymysqlFacade {
       tinymysql.createDatabase(database);
     }
 
-    public List<String> execute(String queryString) {
+    public List<String> execute(String queryToExecute) {
       return Arrays.stream(Queries.values())
-        .filter(query -> query.matches(queryString))
+        .filter(query -> query.matches(queryToExecute))
         .map(query -> query.execute(tinymysql))
         .findFirst()
         .orElse(Collections.emptyList());

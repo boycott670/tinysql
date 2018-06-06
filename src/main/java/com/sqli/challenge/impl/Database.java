@@ -15,4 +15,14 @@ final class Database
   {
     return tables.showTables();
   }
+  
+  void createTable(final String tableName, final String[] tableColumns)
+  {
+    tables.createTable(tableName, tableColumns);
+  }
+  
+  List<String> selectFromTable(final String tableName, final String[] columnsToSelect)
+  {
+    return tables.selectFromTable(tableName, columnsToSelect);
+  }
 }

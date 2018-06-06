@@ -21,4 +21,14 @@ public final class Tinymysql
   {
     return databases.showTables();
   }
+  
+  public void createTable(final String tableName, final String[] tableColumns)
+  {
+    databases.createTable(tableName, tableColumns);
+  }
+  
+  public List<String> selectFromTable(final String tableName, final String[] columnsToSelect)
+  {
+    return databases.selectFromTable(tableName, columnsToSelect);
+  }
 }
