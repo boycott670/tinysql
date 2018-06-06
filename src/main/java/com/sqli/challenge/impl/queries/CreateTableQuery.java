@@ -19,7 +19,7 @@ public final class CreateTableQuery implements Query
     
     final String rawColumns = queryParameters[1];
     
-    columns = Arrays.stream(rawColumns.split(", "))
+    columns = Arrays.stream(rawColumns.split(","))
         .map(columnDefinition -> columnDefinition.split(" ")[0])
         .toArray(String[]::new);
   }

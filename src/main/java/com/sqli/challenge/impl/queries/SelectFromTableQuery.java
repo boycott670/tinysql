@@ -1,6 +1,5 @@
 package com.sqli.challenge.impl.queries;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.sqli.challenge.impl.Tinymysql;
@@ -14,7 +13,7 @@ public final class SelectFromTableQuery implements Query
   @Override
   public void setQueryParameters(String[] queryParameters)
   {
-    columnsToSelect = Arrays.copyOfRange(queryParameters, 0, queryParameters.length - 1);
+    columnsToSelect = queryParameters[0].split(",");
     
     tableName = queryParameters[queryParameters.length - 1];
   }
