@@ -1,10 +1,10 @@
 package com.sqli.challenge.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.sqli.challenge.SqlFacadeException;
 
@@ -19,10 +19,7 @@ final class Tables
   
   List<String> showTables()
   {
-    return tables.keySet()
-        .stream()
-        .sorted()
-        .collect(Collectors.toList());
+    return new ArrayList<>(tables.keySet());
   }
   
   void createTable(final String tableName, final String[] tableColumns)

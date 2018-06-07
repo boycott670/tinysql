@@ -1,10 +1,9 @@
 package com.sqli.challenge;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.sqli.challenge.impl.Queries;
+import com.sqli.challenge.impl.QueryMatcherFactory;
 import com.sqli.challenge.impl.Tinymysql;
 
 public class TinymysqlFacade
@@ -22,12 +21,10 @@ public class TinymysqlFacade
     tinymysql.createDatabase(database);
   }
 
-  public List<String> execute(String queryToExecute)
+  public List<String> execute(String query)
   {
-    return Arrays.stream(Queries.values())
-        .filter(query -> query.matches(queryToExecute))
-        .map(query -> query.execute(tinymysql))
-        .findFirst()
+    return QueryMatcherFactory.getQueryMatcher(query)
+        .map(queryMatcher -> queryMatcher.execute(tinymysql))
         .orElse(Collections.emptyList());
   }
 }
