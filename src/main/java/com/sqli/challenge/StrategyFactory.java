@@ -1,6 +1,7 @@
 package com.sqli.challenge;
 
 import com.sqli.challenge.strategies.CreateTableStrategy;
+import com.sqli.challenge.strategies.SelectTableStrategy;
 import com.sqli.challenge.strategies.ShowTablesStrategy;
 import com.sqli.challenge.strategies.Strategy;
 
@@ -15,6 +16,10 @@ public class StrategyFactory
      else if (query.startsWith("CREATE TABLE"))
      {
        return new CreateTableStrategy();
+     }
+     else if (query.startsWith("select"))
+     {
+       return new SelectTableStrategy();
      }
      
      return null;
