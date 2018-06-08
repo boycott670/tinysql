@@ -1,15 +1,27 @@
 package com.sqli.challenge;
 
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class TinymysqlFacade {
-    public void createDatabase(String database) {
+public class TinymysqlFacade
+{
+  private Set<Database> databases;
+  
+  private Database currentDatabase;
 
-    }
+  public TinymysqlFacade()
+  {
+    databases = new HashSet<>();
+  }
 
-    public List<String> execute(String s) {
-        return new ArrayList<>();
-    }
+  public void createDatabase(String databaseName)
+  {
+    databases.add(currentDatabase = new Database(databaseName));
+  }
+
+  public List<String> execute(String query)
+  {
+    return StrategyFactory.getStrategy(query).execute(query, currentDatabase);
+  }
 }
