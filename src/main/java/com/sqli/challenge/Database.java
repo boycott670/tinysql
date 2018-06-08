@@ -1,42 +1,25 @@
 package com.sqli.challenge;
 
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Database
 {
-  private String name;
-
-  private Set<Table> tables;
+  private Map<String, Table> tables;
 
   public Database(String name)
   {
-    this.name = name;
-
-    tables = new HashSet<>();
+    tables = new HashMap<>();
   }
 
   public Map<String, Table> getTables()
   {
-    return Collections.unmodifiableMap(
-        tables.stream()
-            .collect(Collectors.toMap(Table::getName, Function.identity()))
-    );
+    return Collections.unmodifiableMap(tables);
   }
 
-  public void addTable(Table table)
+  public void addTable(String tableName)
   {
-    tables.add(table);
-  }
-  
-  @Override
-  public boolean equals(Object other)
-  {
-    return other instanceof Database ? Objects.equals(name, ((Database)other).name) : false;
+    tables.put(tableName, new Table());
   }
 }

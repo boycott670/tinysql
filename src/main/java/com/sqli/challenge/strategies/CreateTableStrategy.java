@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.sqli.challenge.Database;
-import com.sqli.challenge.Table;
 
 public class CreateTableStrategy implements Strategy
 {
@@ -17,9 +16,10 @@ public class CreateTableStrategy implements Strategy
   {
     Matcher queryPatternMatcher = queryPattern.matcher(query);
     
-    queryPatternMatcher.find();
-    
-    database.addTable(new Table(queryPatternMatcher.group("tableName")));
+    if (queryPatternMatcher.find())
+    {
+      database.addTable(queryPatternMatcher.group("tableName"));
+    }
     
     return null;
   }
