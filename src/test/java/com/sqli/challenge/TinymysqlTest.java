@@ -31,6 +31,7 @@ public class TinymysqlTest
     thrown.expect(SqlFacadeException.class);
     thrown.expectMessage("No Database selected.");
     TinymysqlFacade sqlFacade = new TinymysqlFacade();
+    @SuppressWarnings("unused")
     List<String> results = sqlFacade.execute("show tables");
   }
 
@@ -55,6 +56,7 @@ public class TinymysqlTest
     thrown.expect(SqlFacadeException.class);
     thrown.expectMessage("Table not found.");
     sqlFacade.createDatabase("db1");
+    @SuppressWarnings("unused")
     List<String> results = sqlFacade.execute("select LastName, FirstName from Author");
   }
 

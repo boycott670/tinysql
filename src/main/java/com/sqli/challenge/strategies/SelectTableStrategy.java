@@ -20,17 +20,13 @@ public class SelectTableStrategy implements Strategy
   @Override
   public List<String> execute(String query, Database database)
   {
-    Map<String, Table> databaseTablesByName = database.getTables()
-        .stream()
-        .collect(Collectors.toMap(Table::getName, Function.identity()));
-    
     Matcher matcher = queryPattern.matcher(query);
     
     matcher.find();
     
-    Table tableToSelectFrom = databaseTablesByName.get(matcher.group("tableName"));
+    Table tableToSelectFrom = database.getTables().get(matcher.group("tableName"));
     
-    String[] columnsToSelect = matcher.group("columnsNames").split(", ");
+    String[] columnsToSelect = matcher.group("columnsNames").replaceAll("\\s+", "").split(",");
     
     if (tableToSelectFrom == null)
     {

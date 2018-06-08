@@ -2,8 +2,11 @@ package com.sqli.challenge;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Database
 {
@@ -18,9 +21,12 @@ public class Database
     tables = new HashSet<>();
   }
 
-  public Set<Table> getTables()
+  public Map<String, Table> getTables()
   {
-    return Collections.unmodifiableSet(tables);
+    return Collections.unmodifiableMap(
+        tables.stream()
+            .collect(Collectors.toMap(Table::getName, Function.identity()))
+    );
   }
 
   public void addTable(Table table)
